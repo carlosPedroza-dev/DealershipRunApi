@@ -1,7 +1,6 @@
 ﻿
 
 using DealershipRun.AppHost.Order;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -27,6 +26,8 @@ namespace DealershipRun.AppHost.User
         [JsonIgnore]
         [MaxLength(20)]
         public string PasswordHash { get; set; }
+        public Role role { get; set; }
         public List<OrderEntity> Orders{get;set;}
+
     }
 }
