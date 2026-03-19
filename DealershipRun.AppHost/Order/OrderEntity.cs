@@ -8,7 +8,7 @@ namespace DealershipRun.AppHost.Order
     public class OrderEntity
     {
         [Key]
-        public long id { get; set; }
+        public long Id { get; set; }
         [Required]
         public DateTime OrderTime { get; set; }
         [Required]
