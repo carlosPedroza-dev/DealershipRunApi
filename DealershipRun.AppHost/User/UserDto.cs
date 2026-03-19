@@ -7,10 +7,9 @@ namespace DealershipRun.AppHost.User
 {
     public record UserDto(
         long Id,
-        DateTime OrderDate,
-        decimal TotalAmount,
-        OrderStatus Status,
-        long UserId,
-        long CarId
+        string Username,
+        string Email,
+        Role Role,
+        List<OrderEntity> Orders
         );
 }
