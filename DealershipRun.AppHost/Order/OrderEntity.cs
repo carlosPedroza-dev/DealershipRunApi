@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DealershipRun.AppHost.Order
 {
+  
     public class OrderEntity
     {
         [Key]
@@ -14,7 +15,9 @@ namespace DealershipRun.AppHost.Order
         public decimal TotalAmount { get; set; }
         [Required]
         public OrderStatus Status { get; set; }
+        [Required]
         public long UserId { get; set; }
+        [Required]
         public long CarId {  get; set; }
     }
 }
