@@ -9,15 +9,15 @@ namespace DealershipRun.AppHost.Car
     public class Car
     {
         [Key]
-        private long id { get; set; }
+        private long Id { get; set; }
         [Required]
-        private string brand { get; set; }
+        private string Brand { get; set; }
         [Required]
-        private string model { get; set; }
-        private int year { get; set; }
-        private decimal price { get; set; }
-        private decimal mileage { get; set; }
-        private CarStatus carStatus { get; set; }
+        private string Model { get; set; }
+        private int Year { get; set; }
+        private decimal Price { get; set; }
+        private decimal Mileage { get; set; }
+        private CarStatus CarStatus { get; set; }
 
         private List<OrderEntity> Orders { get; set; }
 
