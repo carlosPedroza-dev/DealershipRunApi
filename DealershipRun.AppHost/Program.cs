@@ -3,15 +3,23 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DotNetEnv;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDbContext<DealershipRunDBcontext>(options =>
+builder.Services.AddDbContext<DealershipRunDBcontext>(options => 
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    var host = Environment.GetEnvironmentVariable("DBHost");
+    var port = Environment.GetEnvironmentVariable("DBPort");
+    var db = Environment.GetEnvironmentVariable("DBName");
+    var user = Environment.GetEnvironmentVariable("DBUser");
+    var password = Environment.GetEnvironmentVariable("DBPassword");
+    options.UseNpgsql($"Host={host};Port={port};Database={db};Username={user};Password={password}");
 });
 
 
