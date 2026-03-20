@@ -20,15 +20,15 @@ namespace DealershipRun.AppHost.User
         [Required]
         [EmailAddress]
         [MaxLength(50)]
-
-        public string Email { get; set; } = string.Empty;
+       public string Email { get; set; } = string.Empty;
+        [Column("password_hash")]
         [Required]
         [JsonIgnore]
         [MaxLength(60)]
         public string PasswordHash { get; set; } = string.Empty;
-
-
+        [Column("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [Column("role")]
         public Role Role { get; set; }
         public List<OrderEntity> Orders { get; set; } = [];
 
