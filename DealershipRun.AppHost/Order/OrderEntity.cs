@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DealershipRun.AppHost.Order
 {
 
-    [Table("order")]
+    [Table("ordersL")]
     public class OrderEntity
     {
         [Key]
