@@ -5,7 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetEnv;
 
-Env.Load();
+var root = Directory.GetCurrentDirectory();
+var dotenv = Path.Combine(root, ".env");
+Env.Load(dotenv);
 
 var builder = WebApplication.CreateBuilder(args);
 

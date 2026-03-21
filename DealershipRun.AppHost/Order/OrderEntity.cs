@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DealershipRun.AppHost.Order
 {
 
-    [Table("ordersL")]
+    [Table("orders")]
     public class OrderEntity
     {
         [Key]
@@ -26,10 +26,10 @@ namespace DealershipRun.AppHost.Order
         [Required]
         [Column("user_id")]
         public long UserId { get; set; }
-        [ForeignKey(nameof(User))]
-        public UserEntity User { get; set; }
-        [ForeignKey(nameof(Car))]
-        public CarEntity Car { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public UserEntity User { get; set; } = null;
+        [ForeignKey(nameof(CarId))]
+        public CarEntity Car { get; set; } = null;
         [Required]
         [Column("car_id")]
         public long CarId {  get; set; }
