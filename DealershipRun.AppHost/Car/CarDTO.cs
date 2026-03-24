@@ -11,7 +11,6 @@ namespace DealershipRun.AppHost.Car
          int Year,
          decimal Price,
          double Millage,
-         CarStatus Status,
-         List<OrderEntity> Orders
+         CarStatus Status
          );
 }
