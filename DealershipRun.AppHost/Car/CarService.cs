@@ -10,14 +10,14 @@ namespace DealershipRun.AppHost.Car
         public CarService(ICarRepository carRepository) {
             _carRepository = carRepository;
         }
-        //Done
+        
         public async Task<CarEntity> createCar(CarEntity car)
         {
             if (car.Price <= 0) { throw new BadRequestException("Price must be greater than 0"); }
             if (car.Year < 1900) {throw new BadRequestException("Invalid Year"); }
             return await _carRepository.createCar(car);
         }
-        //Done
+        
         public async Task Delete(long id)
         {
             var car = await _carRepository.getById(id);
@@ -26,12 +26,12 @@ namespace DealershipRun.AppHost.Car
             }
             await _carRepository.Delete(id);
         }
-        //Done
+        
         public async Task<List<CarEntity>> getAll()
         {
             return await _carRepository.getAll();
         }
-        //Done
+        
         public async Task<CarEntity?> getById(long id)
         {
             var car = await _carRepository.getById(id);
