@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace DealershipRun.AppHost.Car
+namespace DealershipRun.AppHost.User
 {
-    internal interface IUserRepository
+    public interface IUserRepository
     {
+
     }
 }
