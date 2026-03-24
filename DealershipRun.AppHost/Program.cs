@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetEnv;
+using DealershipRun.AppHost.Middleware;
 
 var root = Directory.GetCurrentDirectory();
 var dotenv = Path.Combine(root, ".env");
@@ -26,4 +27,5 @@ builder.Services.AddDbContext<DealershipRunDBcontext>(options =>
 
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 app.Run();
