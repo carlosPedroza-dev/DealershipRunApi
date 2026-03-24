@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetEnv;
 using DealershipRun.AppHost.Middleware;
+using DealershipRun.AppHost.Car;
 
 var root = Directory.GetCurrentDirectory();
 var dotenv = Path.Combine(root, ".env");
@@ -25,7 +26,9 @@ builder.Services.AddDbContext<DealershipRunDBcontext>(options =>
     options.UseNpgsql($"Host={host};Port={port};Database={db};Username={user};Password={password}");
 });
 
-
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+builder.Services.AddScoped<ICarService, CarService>();
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
+app.MapControllers();
 app.Run();

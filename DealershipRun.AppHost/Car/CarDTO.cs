@@ -10,7 +10,7 @@ namespace DealershipRun.AppHost.Car
          string Model,
          int Year,
          decimal Price,
-         double Millage,
+         decimal Milleage,
          CarStatus Status
          );
 }
