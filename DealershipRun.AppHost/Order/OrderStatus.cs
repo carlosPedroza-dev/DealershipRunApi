@@ -5,6 +5,7 @@ namespace DealershipRun.AppHost.Order
     {
         PENDING,
         PAID,
+        COMPLETED,
         CANCELLED
     }
 }
