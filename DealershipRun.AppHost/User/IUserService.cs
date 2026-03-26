@@ -4,10 +4,11 @@ namespace DealershipRun.AppHost.User
 {
     public interface IUserService
     {
-        Task register(UserEntity user);
+        Task<UserEntity> Register(UserEntity user);
         Task Login(string username, string password);
-        Task<UserEntity> getById(long id);
-        Task delete(long id);
-        Task updateRole(long id, Role role);
+        Task<UserEntity?> GetById(long id);
+        Task<UserEntity?> GetByEmail(string email);
+        Task Delete(long id);
+        Task UpdateRole(long id, Role role);
     }
 }
