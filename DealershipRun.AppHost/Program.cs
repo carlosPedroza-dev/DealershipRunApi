@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetEnv;
 using DealershipRun.AppHost.Middleware;
 using DealershipRun.AppHost.Car;
+using DealershipRun.AppHost.Order;
+using DealershipRun.AppHost.User;
 
 var root = Directory.GetCurrentDirectory();
 var dotenv = Path.Combine(root, ".env");
@@ -28,6 +30,11 @@ builder.Services.AddDbContext<DealershipRunDBcontext>(options =>
 
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<IOrderRepository,OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<IUserService,UserService>();
+
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();

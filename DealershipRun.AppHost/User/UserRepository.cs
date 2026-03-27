@@ -14,7 +14,7 @@ namespace DealershipRun.AppHost.User
 
         public async Task Delete(long id)
         {
-            var user = await _context.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             if (user != null) {
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
@@ -31,10 +31,7 @@ namespace DealershipRun.AppHost.User
             return await _context.Users.FindAsync(id);
         }
 
-        public Task Login(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<UserEntity> Register(UserEntity user)
         {
