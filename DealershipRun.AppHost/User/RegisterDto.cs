@@ -1,14 +1,11 @@
 ﻿
-
-
-using DealershipRun.AppHost.Order;
-
 namespace DealershipRun.AppHost.User
 {
-    public record UserDto(
-        long Id,
+    public record RegisterDto(
         string Username,
         string Email,
-        Role Role
+        string Password
+
+        
         );
 }
