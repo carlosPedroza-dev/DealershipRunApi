@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var root = Directory.GetCurrentDirectory();
 var dotenv = Path.Combine(root, ".env");
@@ -32,6 +35,22 @@ builder.Services.AddDbContext<DealershipRunDBcontext>(options =>
     options.UseNpgsql($"Host={host};Port={port};Database={db};Username={user};Password={password}");
 });
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = Environment.GetEnvironmentVariable("JwtIssuer"),
+        ValidAudience = Environment.GetEnvironmentVariable("JwtAudience"),
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JwtSecret")!))
+    };
+});
+
+builder.Services.AddAuthorization();
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
@@ -41,6 +60,8 @@ builder.Services.AddScoped<IUserService,UserService>();
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.UseExceptionHandler(a => a.Run(async context =>
