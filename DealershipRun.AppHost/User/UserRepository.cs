@@ -1,5 +1,6 @@
 ﻿
 using DealershipRun.AppHost.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DealershipRun.AppHost.User
 {
@@ -23,7 +24,7 @@ namespace DealershipRun.AppHost.User
 
         public async Task<UserEntity?> GetByEmail(string email)
         {
-            return await _context.Users.FindAsync(email);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task<UserEntity?> GetById(long id)

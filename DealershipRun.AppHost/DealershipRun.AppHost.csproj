@@ -5,12 +5,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <IsAspireHost>true</IsAspireHost>
     <UserSecretsId>a53a9d46-0565-4ac4-bf4f-f1421943f009</UserSecretsId>
   </PropertyGroup>
 
+   <ItemGroup>
+    <None Include=".env" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.2" />
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
     <PackageReference Include="DotNetEnv" Version="2.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.12" />
