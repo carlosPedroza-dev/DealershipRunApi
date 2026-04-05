@@ -1,20 +1,24 @@
+using DealershipRun.AppHost.Car;
 using DealershipRun.AppHost.Data;
+using DealershipRun.AppHost.Middleware;
+using DealershipRun.AppHost.Order;
+using DealershipRun.AppHost.User;
+using DotNetEnv;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DotNetEnv;
-using DealershipRun.AppHost.Middleware;
-using DealershipRun.AppHost.Car;
-using DealershipRun.AppHost.Order;
-using DealershipRun.AppHost.User;
 
 var root = Directory.GetCurrentDirectory();
 var dotenv = Path.Combine(root, ".env");
+
 Env.Load(dotenv);
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://localhost:5001");
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -38,4 +42,12 @@ builder.Services.AddScoped<IUserService,UserService>();
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
+
+app.UseExceptionHandler(a => a.Run(async context =>
+{
+    var feature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+    var exception = feature?.Error;
+    await context.Response.WriteAsJsonAsync(new { error = exception?.Message, detail = exception?.ToString() });
+}));
+
 app.Run();
